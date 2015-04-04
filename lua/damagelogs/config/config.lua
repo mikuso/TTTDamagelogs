@@ -13,9 +13,11 @@
 	The third argument is the RDM Manager access. Set it to true or false.
 ]]--
 
+Damagelog:AddUser("owner", 4, true)
 Damagelog:AddUser("superadmin", 4, true)
-Damagelog:AddUser("admin", 4, true)
-Damagelog:AddUser("operator", 1, false)
+Damagelog:AddUser("turkle", 4, true)
+Damagelog:AddUser("admin", 3, true)
+Damagelog:AddUser("operator", 3, true)
 Damagelog:AddUser("user", 1, false)
 Damagelog:AddUser("guest", 1, false)
 
@@ -67,3 +69,8 @@ Damagelog.Autoslay_DefaultReason = "No reason specified"
 -- The number of days the logs last on the database (to avoid lags when opening the menu)
 
 Damagelog.LogDays = 31
+
+-- Override settings
+for k,v in pairs(NTHC.DamageLogs) do
+    Damagelog[k] = v
+end
