@@ -8,3 +8,4 @@ Damagelog.MySQL_Informations = NTHC.DamageLogsDB
 	database = "",
 	port = 3306
 }
+]]--
