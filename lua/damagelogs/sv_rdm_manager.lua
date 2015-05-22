@@ -130,6 +130,8 @@ function Damagelog:StartReport(ply)
 		local remaining_reports = ply:RemainingReports()
 		if remaining_reports <= 0 then
 			ply:Damagelog_Notify(DAMAGELOG_NOTIFY_ALERT, "You can only report twice per round!", 4, "buttons/weapon_cant_buy.wav")
+		elseif NTH and NTH.Round and NTH.Round.RDM then -- NTH
+			ply:Damagelog_Notify(DAMAGELOG_NOTIFY_ALERT, "You can't report during an RDM round!", 4, "buttons/weapon_cant_buy.wav")
 		else
 			net.Start("DL_AllowReport")
 			if ply.DeathDmgLog and ply.DeathDmgLog[Damagelog.CurrentRound] then

@@ -20,6 +20,7 @@ end)
 timer.Create("SpecDM_Recording", 0.2, 0, function()
 
 	if not GetRoundState or GetRoundState() != ROUND_ACTIVE then return end
+	if NTH and NTH.Round and NTH.Round.RDM then return end -- NTH
 
 	if #Damagelog.Records >= 50 then
 		table.remove(Damagelog.Records, 1)

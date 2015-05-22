@@ -33,7 +33,9 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 		end
 		if GetRoundState() == ROUND_ACTIVE then
 			net.Start("DL_Ded")
-			if tbl[2] == ROLE_TRAITOR and (tbl[4] == ROLE_INNOCENT or tbl[4] == ROLE_DETECTIVE) then
+			if WasAvoidable(attacker, ply, dmginfo) then -- NTH
+				net.WriteUInt(0,1)
+			elseif tbl[2] == ROLE_TRAITOR and (tbl[4] == ROLE_INNOCENT or tbl[4] == ROLE_DETECTIVE) then
 				net.WriteUInt(0,1)
 			else
 				net.WriteUInt(1,1)
