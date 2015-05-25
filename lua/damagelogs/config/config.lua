@@ -15,7 +15,7 @@
 
 Damagelog:AddUser("owner", 4, true)
 Damagelog:AddUser("superadmin", 4, true)
-Damagelog:AddUser("turkle", 4, true)
+Damagelog:AddUser("pwner", 4, true)
 Damagelog:AddUser("admin", 3, true)
 Damagelog:AddUser("operator", 3, true)
 Damagelog:AddUser("user", 1, false)
