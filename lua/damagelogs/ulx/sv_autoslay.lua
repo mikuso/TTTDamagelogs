@@ -35,7 +35,7 @@ hook.Add("PlayerAuthed", "DamagelogNames", function(ply, steamid, uniqueid)
 	elseif query != name then
 		sql.Query("UPDATE damagelog_names SET name = "..sql.SQLStr(name).." WHERE steamid = '"..steamid.."' LIMIT 1;")
 	end
-	local c = sql.Query("SELECT slays FROM damagelog_autoslay WHERE steamid = '"..steamid.."' LIMIT 1;")
+	local c = sql.Query("SELECT slays FROM damagelog_autoslay WHERE ply = '"..steamid.."' LIMIT 1;")
 	if not tonumber(c) then c = 0 end
 	ply.AutoslaysLeft = c
 	net.Start("DL_AutoslaysLeft")
@@ -223,7 +223,7 @@ hook.Add("TTTBeginRound", "Damagelog_AutoSlay", function()
 end)
 
 hook.Add("PlayerDisconnected", "Autoslay_Message", function(ply)
-	if tonumber(ply.AutoslaysLeft) and tonumber(ply.AutoslaysLeft) > 0 then
+	if tonumber(ply.AutoslaysLeft) and ply.AutoslaysLeft > 0 then
 		net.Start("DL_PlayerLeft")
 		net.WriteString(ply:Nick())
 		net.WriteString(ply:SteamID())

@@ -121,15 +121,15 @@ function Damagelog:WeaponFromDmg(dmg)
 		elseif dmg:IsDamageType(DMG_CRUSH) then
 			wep = "falling or prop damage"
 		elseif dmg:IsDamageType(DMG_SLASH) then
-			wep = "sharp object"
+			wep = "a sharp object"
 		elseif dmg:IsDamageType(DMG_CLUB) then
 			wep = "clubbed to death"
 		elseif dmg:IsDamageType(DMG_SHOCK) then
-			wep = "electric shock"
+			wep = "an electric shock"
 		elseif dmg:IsDamageType(DMG_ENERGYBEAM) then
-			wep = "laser"
+			wep = "a laser"
 		elseif dmg:IsDamageType(DMG_SONIC) then
-			wep = "teleport collision"
+			wep = "a teleport collision"
 		elseif dmg:IsDamageType(DMG_PHYSGUN) then
 			wep = "a massive bulk"
 		elseif inf:IsPlayer() then
