@@ -546,21 +546,22 @@ function Damagelog:DrawRDMManager(x,y)
 		SetState.DoClick = function()
 			local menu = DermaMenu()
 			local attacker = player.GetBySteamID(Damagelog.SelectedReport.attacker)
-			if not IsValid(attacker) and (Damagelog.SelectedReport.status == RDM_MANAGER_WAITING_FOR_ATTACKER or Damagelog.SelectedReport.status == RDM_MANAGER_WAITING_FOR_VICTIM) then
-				DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
-			end
-			if Damagelog.SelectedReport.status == RDM_MANAGER_WAITING then
-				DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
-			end
+			DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
+			-- if not IsValid(attacker) and (Damagelog.SelectedReport.status == RDM_MANAGER_WAITING_FOR_ATTACKER or Damagelog.SelectedReport.status == RDM_MANAGER_WAITING_FOR_VICTIM) then
+			-- 	DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
+			-- end
+			-- if Damagelog.SelectedReport.status == RDM_MANAGER_WAITING then
+			-- 	DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
+			-- end
 			if Damagelog.SelectedReport.status == RDM_MANAGER_PROGRESS then
 				if IsValid(attacker) then
 					DrawStatusMenuOption(RDM_MANAGER_WAITING, menu)
 				end
 				DrawStatusMenuOption(RDM_MANAGER_FINISHED, menu)
 			end
-			if Damagelog.SelectedReport.status == RDM_MANAGER_FINISHED then
-				DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
-			end
+			-- if Damagelog.SelectedReport.status == RDM_MANAGER_FINISHED then
+			-- 	DrawStatusMenuOption(RDM_MANAGER_PROGRESS, menu)
+			-- end
 			menu:Open()
 		end
 		
