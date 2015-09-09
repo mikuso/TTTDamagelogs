@@ -30,9 +30,9 @@ function event:PlayerTakeRealDamage(ent, dmginfo, original_dmg)
 	if not (ent.IsGhost and ent:IsGhost()) and ent:IsPlayer() and (IsValid(att) and att:IsPlayer()) and ent != att then
 		if math.floor(original_dmg) > 0 then
 			local tbl = { 
-				[1] = ent:Nick(), 
+				[1] = (ent.GetAKAName and ent:GetAKAName()) or ent:Nick(), -- NTH
 				[2] = ent:GetRole(), 
-				[3] = att:Nick(), 
+				[3] = (att.GetAKAName and att:GetAKAName()) or att:Nick(), -- NTH
 				[4] = att:GetRole(), 
 				[5] = math.Round(dmginfo:GetDamage()), 
 				[6] = Damagelog:WeaponFromDmg(dmginfo), 

@@ -16,9 +16,9 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 		Damagelog.SceneID = Damagelog.SceneID + 1
 		scene = Damagelog.SceneID
 		local tbl = { 
-			[1] = attacker:Nick(), 
+			[1] = (attacker.GetAKAName and attacker:GetAKAName()) or attacker:Nick(), -- NTH
 			[2] = attacker:GetRole(), 
-			[3] = ply:Nick(), 
+			[3] = (ply.GetAKAName and ply:GetAKAName()) or ply:Nick(), -- NTH
 			[4] = ply:GetRole(), 
 			[5] = Damagelog:WeaponFromDmg(dmginfo),
 			[6] = ply:SteamID(),
