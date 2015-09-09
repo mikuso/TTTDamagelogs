@@ -38,7 +38,9 @@ function event:PlayerTakeRealDamage(ent, dmginfo, original_dmg)
 				[6] = Damagelog:WeaponFromDmg(dmginfo), 
 				[7] = ent:SteamID(), 
 				[8] = att:SteamID(), 
-				[9] = math.Round(original_dmg)
+				[9] = math.Round(original_dmg),
+				["attackerVIP"] = att.GetVIP and att:GetVIP(), -- NTH
+				["victimVIP"] = ent.GetVIP and ent:GetVIP(), -- NTH
 			}
 			if Damagelog:IsTeamkill(tbl[2], tbl[4]) then
 				tbl.icon = { "icon16/exclamation.png" }
@@ -84,7 +86,20 @@ function event:ToString(tbl)
 
 	local weapon = Damagelog.weapon_table[tbl[6]] or tbl[6]
 	local karma_reduced = tbl[5] < tbl[9]
-	local str = string.format("%s [%s] has damaged %s [%s] for %s", tbl[3], Damagelog:StrRole(tbl[4]), tbl[1], Damagelog:StrRole(tbl[2]), tbl[5]) 
+
+	-- NTH
+	local attackerName = tbl[3]
+	if tbl.attackerVIP then
+		attackerName = tbl.attackerVIP .. " (a.k.a. " .. tbl[3] .. ")"
+	end
+
+	-- NTH
+	local victimName = tbl[1]
+	if tbl.victimVIP then
+		victimName = tbl.victimVIP .. " (a.k.a. " .. tbl[1] .. ")"
+	end
+
+	local str = string.format("%s [%s] has damaged %s [%s] for %s", attackerName, Damagelog:StrRole(tbl[4]), victimName, Damagelog:StrRole(tbl[2]), tbl[5]) -- NTH
 	if karma_reduced then
 		str = str .. string.format(" (%s)", tbl[9])
 	end

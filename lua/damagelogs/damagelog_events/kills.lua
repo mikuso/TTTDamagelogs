@@ -23,7 +23,9 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 			[5] = Damagelog:WeaponFromDmg(dmginfo),
 			[6] = ply:SteamID(),
 			[7] = attacker:SteamID(),
-			[8] = scene
+			[8] = scene,
+			["attackerVIP"] = attacker.GetVIP and attacker:GetVIP(), -- NTH
+			["victimVIP"] = ply.GetVIP and ply:GetVIP(), -- NTH
 		}
 		self.CallEvent(tbl)
 		if scene then
@@ -50,9 +52,22 @@ end
 function event:ToString(v)
 
 	local weapon = Damagelog.weapon_table[v[5]] or v[5]
-	text = string.format("%s [%s] killed %s [%s] with an unknown weapon", v[1], Damagelog:StrRole(v[2]), v[3], Damagelog:StrRole(v[4])) 
+
+	-- NTH
+	local attackerName = v[1]
+	if v.attackerVIP then
+		attackerName = v.attackerVIP .. " (a.k.a. " .. v[1] .. ")"
+	end
+
+	-- NTH
+	local victimName = v[3]
+	if v.victimVIP then
+		victimName = v.victimVIP .. " (a.k.a. " .. v[3] .. ")"
+	end
+
+	text = string.format("%s [%s] killed %s [%s] with an unknown weapon", attackerName, Damagelog:StrRole(v[2]), victimName, Damagelog:StrRole(v[4])) -- NTH
 	if weapon then
-		text = string.format("%s [%s] killed %s [%s] with %s", v[1], Damagelog:StrRole(v[2]), v[3], Damagelog:StrRole(v[4]), weapon)
+		text = string.format("%s [%s] killed %s [%s] with %s", attackerName, Damagelog:StrRole(v[2]), victimName, Damagelog:StrRole(v[4]), weapon) -- NTH
 	end
 	return text
 	
